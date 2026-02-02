@@ -1,0 +1,84 @@
+.categories-section {
+    background-color: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.highlight {
+    color: #4caf50;
+    /* Green text for "Up to 50% off" */
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: #e8f5e9;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.5rem;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+}
+
+.category-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1;
+    /* Square */
+    border-radius: var(--radius-md);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.category-image-placeholder {
+    width: 60%;
+    height: 60%;
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Inner placeholder */
+    border-radius: 4px;
+}
+
+.category-name {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 90%;
+}

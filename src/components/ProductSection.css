@@ -1,0 +1,45 @@
+.product-section {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: white;
+}
+
+.product-section.theme-orange {
+    background-color: #fff8e1;
+    /* Light orange bg */
+}
+
+/* Inherit section-header styles from global or Categories, mimicking here to be safe */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.view-all {
+    color: #1976d2;
+    /* Blue link color */
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
