@@ -1,0 +1,121 @@
+.product-card {
+    background: white;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.product-badge {
+    position: absolute;
+    top: 0;
+    left: 12px;
+    background-color: #2e7d32;
+    /* darker green usually, but image shows blue/teal tag? Image says 16% OFF in blue */
+    background-color: #1976d2;
+    /* Checking image, "Sugar free" has blue tag */
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 6px;
+    text-align: center;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    line-height: 1.1;
+    z-index: 10;
+}
+
+/* Variant for different badges if needed, staying simple for now */
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.product-img-element {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.image-placeholder-inner {
+    width: 50%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-weight {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.product-pricing {
+    margin-top: auto;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.original-price {
+    font-size: 0.85rem;
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.current-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.add-btn {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.add-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
