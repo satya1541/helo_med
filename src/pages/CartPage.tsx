@@ -1,118 +1,185 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Crown, X } from 'lucide-react';
-import Sidebar from '../components/Sidebar';
+import { Trash2, Plus, Minus, ChevronRight, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { useCart } from '../context/CartContext';
+import PaymentModal from '../components/PaymentModal';
+import OrderSuccessModal from '../components/OrderSuccessModal';
 import './CartPage.css';
-
-const cartItems = [
-    {
-        id: 1,
-        name: 'Nestle Cerelac (Wheat)',
-        weight: '300 gm',
-        price: 1020,
-        originalPrice: 1080,
-        savings: 60,
-        quantity: 1,
-        image: 'https://placehold.co/80/FFF3E0/e65100?text=Cerelac'
-    },
-    {
-        id: 2,
-        name: 'Nestle Cerelac (Ragi Apple)',
-        weight: '300 gm',
-        price: 2000,
-        originalPrice: 2030,
-        savings: 30,
-        quantity: 1,
-        image: 'https://placehold.co/80/FCE4EC/c2185b?text=Cerelac'
-    },
-    {
-        id: 3,
-        name: 'Dettol Handwash',
-        weight: '200 ml',
-        price: 200,
-        originalPrice: 254,
-        savings: 54,
-        quantity: 1,
-        image: 'https://placehold.co/80/E8F5E9/2e7d32?text=Dettol'
-    }
-];
 
 const CartPage = () => {
     const navigate = useNavigate();
-    const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
+    const { cartItems, removeFromCart, updateQuantity, cartTotal, placeOrder } = useCart();
+
+    const handleCheckout = () => {
+        if (cartItems.length === 0) return;
+        setIsPaymentModalOpen(true);
+    };
+
+    const confirmPayment = () => {
+        setIsPaymentModalOpen(false);
+        setIsSuccessModalOpen(true);
+        placeOrder();
+    };
+
+    const handleOrderComplete = () => {
+        setIsSuccessModalOpen(false);
+        navigate('/orders');
+    };
 
     return (
-        <>
-            <Sidebar />
-            <div className="cart-page page-with-sidebar">
-                <header className="page-header">
-                    <button className="back-btn" onClick={() => navigate('/')}>
-                        <ArrowLeft size={24} />
-                    </button>
-                    <h1>My Cart</h1>
+        <div className="cart-container-premium">
+            <Header />
+
+            <main className="cart-wrapper-new">
+                <header className="cart-header-new">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="header-content"
+                    >
+                        <span className="page-tag">Checkout</span>
+                        <h1 className="header-title">Your <span className="text-primary italic">Cart</span></h1>
+                    </motion.div>
                 </header>
 
-                <main className="cart-content">
-                    <div className="prime-banner-cart">
-                        <Crown size={20} fill="#FFD700" color="#FFD700" />
-                        <span>Prime</span>
-                        <p>Enjoy 15% savings on every service</p>
-                        <button className="arrow-btn">→</button>
+                <div className="cart-grid-new">
+                    <div className="cart-items-column">
+                        {cartItems.length === 0 ? (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="empty-cart-state"
+                            >
+                                <div className="empty-visual">🛒</div>
+                                <h2>Your cart is feeling light.</h2>
+                                <p>Looks like you haven't added anything yet.</p>
+                                <button className="go-shop-btn" onClick={() => navigate('/medicines')}>
+                                    Start Shopping
+                                </button>
+                            </motion.div>
+                        ) : (
+                            <div className="cart-items-list">
+                                {cartItems.map((item, index) => (
+                                    <motion.div
+                                        key={item.id}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="cart-item-premium"
+                                    >
+                                        <div className="item-image-box">
+                                            <img src={item.image} alt={item.name} />
+                                        </div>
+                                        <div className="item-info-box">
+                                            <div className="item-main">
+                                                <h3>{item.name}</h3>
+                                                <p>{item.weight || '10 Tablets'}</p>
+                                            </div>
+                                            <div className="item-controls">
+                                                <div className="item-qty-selector">
+                                                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+                                                        <Minus size={16} />
+                                                    </button>
+                                                    <span>{item.quantity}</span>
+                                                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                                                        <Plus size={16} />
+                                                    </button>
+                                                </div>
+                                                <button className="item-remove-trigger" onClick={() => removeFromCart(item.id)}>
+                                                    <Trash2 size={18} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="item-price-box">
+                                            <span className="price-tag">₹{(item.price * item.quantity).toFixed(2)}</span>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        )}
+
+                        <div className="cart-actions-bottom">
+                            <button className="add-more-link" onClick={() => navigate('/medicines')}>
+                                <Plus size={20} />
+                                <span>Add more from pharmacy</span>
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="cart-items-section">
-                        <h2>Order Items ({cartItems.length})</h2>
-
-                        {cartItems.map((item) => (
-                            <div key={item.id} className="cart-item">
-                                <img src={item.image} alt={item.name} className="cart-item-image" />
-                                <div className="cart-item-details">
-                                    <button className="remove-btn"><X size={16} /></button>
-                                    <h3>{item.name}</h3>
-                                    <p className="cart-item-weight">{item.weight}</p>
-                                    <div className="cart-item-pricing">
-                                        <span className="cart-item-price">₹{item.price.toFixed(2)}</span>
-                                        <span className="cart-item-original">₹{item.originalPrice.toFixed(2)}</span>
-                                    </div>
-                                    <p className="cart-item-savings">You Save ₹ {item.savings.toFixed(2)}</p>
-                                </div>
-                                <div className="cart-item-quantity">
-                                    <button className="qty-btn">-</button>
-                                    <span>{item.quantity}</span>
-                                    <button className="qty-btn">+</button>
+                    <div className="cart-summary-column">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="summary-card-premium"
+                        >
+                            <div className="summary-header">
+                                <h3>Order Summary</h3>
+                                <div className="summary-badge">
+                                    <Sparkles size={14} />
+                                    <span>Free Delivery</span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
 
-                    <button className="add-more-btn">
-                        <span>+</span> Add more medicines
-                    </button>
+                            <div className="summary-details">
+                                <div className="summary-row">
+                                    <span>Subtotal</span>
+                                    <span>₹{cartTotal.toFixed(2)}</span>
+                                </div>
+                                <div className="summary-row">
+                                    <span>Shipping</span>
+                                    <span className="text-free">FREE</span>
+                                </div>
+                                <div className="summary-row divider"></div>
+                                <div className="summary-row total">
+                                    <span>Total Amount</span>
+                                    <span>₹{cartTotal.toFixed(2)}</span>
+                                </div>
+                            </div>
 
-                    <div className="prescription-upload-cart">
-                        <div className="prescription-icon">📋</div>
-                        <div className="prescription-text">
-                            <h3>Upload your prescription</h3>
-                            <p>to place your order</p>
+                            <button
+                                className={`checkout-trigger ${cartItems.length === 0 ? 'disabled' : ''}`}
+                                onClick={handleCheckout}
+                                disabled={cartItems.length === 0}
+                            >
+                                <span>Continue to Payment</span>
+                                <ChevronRight size={20} />
+                            </button>
+
+                            <p className="secure-note">
+                                🔒 Secure SSL encrypted checkout
+                            </p>
+                        </motion.div>
+
+                        <div className="promo-card-compact">
+                            <div className="promo-info">
+                                <h4>Have a promo code?</h4>
+                                <p>Apply it at the next step</p>
+                            </div>
                         </div>
-                        <button className="upload-btn-cart">↓ Upload</button>
                     </div>
+                </div>
+            </main>
 
-                    <div className="coupons-section">
-                        <div className="coupon-icon">🎫</div>
-                        <span>Coupons and Offers</span>
-                        <a href="#" className="offers-link">3 offers →</a>
-                    </div>
-                </main>
+            <PaymentModal
+                isOpen={isPaymentModalOpen}
+                onClose={() => setIsPaymentModalOpen(false)}
+                onConfirm={confirmPayment}
+                totalAmount={cartTotal}
+            />
 
-                <footer className="cart-footer">
-                    <div className="cart-total">
-                        <span>₹ {total.toFixed(2)}</span>
-                        <a href="#" className="view-bill">View bill</a>
-                    </div>
-                    <button className="checkout-btn">Add delivery details</button>
-                </footer>
-            </div>
-        </>
+            <OrderSuccessModal
+                isOpen={isSuccessModalOpen}
+                onClose={handleOrderComplete}
+            />
+            <Footer />
+        </div>
     );
 };
 

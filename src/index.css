@@ -1,40 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
 :root {
   scroll-behavior: smooth;
-  --primary-color: #008080;
-  /* Teal matching the reference */
-  --secondary-color: #e0f2f1;
-  /* Light teal background */
-  --accent-color: #ff6b6b;
-  /* For sale badges/highlights if needed */
-  --background-color: #f8f9fa;
-  --surface-color: #ffffff;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --border-color: #eeeeee;
 
-  --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Healup Inspired Palette */
+  --primary-color: #006954;
+  /* Premium Teal */
+  --primary-dark: #272E03;
+  /* Deep Green/Black */
+  --accent-color: #C1FF72;
+  /* Lime highlight if needed */
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --background-color: #ffffff;
+  --surface-color: #F4F7F5;
+  /* Soft Mint Gray */
+
+  --text-primary: #272E03;
+  --text-secondary: #5C6353;
+  --text-muted: #8E9486;
+
+  --border-color: #E2E8E4;
+
+  --font-heading: 'Instrument Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-family: var(--font-body);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 30px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 40px rgba(39, 46, 3, 0.08);
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  --container-max: 1280px;
+  --section-padding: 100px;
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   background-color: var(--background-color);
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 a {

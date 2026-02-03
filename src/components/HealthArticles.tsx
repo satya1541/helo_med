@@ -6,14 +6,14 @@ const articles = [
         title: 'Wellness Begins with One Fresh Morning',
         description: 'Fuel your body, refresh your mind, and start your day with movement.',
         date: '25 Dec 2025',
-        image: '/images/image_1770018614558.png'
+        image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600'
     },
     {
         id: 2,
-        title: 'Wellness Begins with One Fresh Morning',
-        description: 'Fuel your body, refresh your mind, and start your day with movement.',
-        date: '25 Dec 2025',
-        image: '/images/image_1770018614558.png'
+        title: 'Nature’s Healing Touch: The Power of Herbs',
+        description: 'Explore how natural remedies can complement your health journey.',
+        date: '28 Dec 2025',
+        image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=600'
     }
 ];
 

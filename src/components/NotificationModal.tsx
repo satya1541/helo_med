@@ -1,4 +1,5 @@
-import { ShoppingBag, Bell, X } from 'lucide-react';
+import { ShoppingBag, Bell, X, CreditCard, Tag, Info, Trash2 } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 import './NotificationModal.css';
 
 interface NotificationModalProps {
@@ -6,79 +7,96 @@ interface NotificationModalProps {
     onClose: () => void;
 }
 
-const notifications = [
-    {
-        id: 1,
-        icon: 'order',
-        iconBg: '#e0f2f1',
-        iconColor: '#00897b',
-        title: 'Order Placed Successfully',
-        message: "Your order has been placed! We'll notify you once it is confirmed.",
-        time: '2 mins ago',
-    },
-    {
-        id: 2,
-        icon: 'bell',
-        iconBg: '#e3f2fd',
-        iconColor: '#1976d2',
-        title: 'Payment Successful',
-        message: 'Payment of ₹ ___ was completed successfully.',
-        time: 'yesterday',
-    },
-    {
-        id: 3,
-        icon: 'bell',
-        iconBg: '#e3f2fd',
-        iconColor: '#1976d2',
-        title: 'Special Offer Just for You',
-        message: 'Unlock exciting discounts on your next purchase!',
-        time: 'yesterday',
-    },
-];
-
 const NotificationModal = ({ isOpen, onClose }: NotificationModalProps) => {
+    const { notifications, clearNotifications, markNotificationsAsRead } = useCart();
+
     if (!isOpen) return null;
 
     const getIcon = (type: string) => {
         switch (type) {
             case 'order':
                 return ShoppingBag;
+            case 'payment':
+                return CreditCard;
+            case 'offer':
+                return Tag;
             default:
-                return Bell;
+                return Info;
         }
+    };
+
+    const getIconStyle = (type: string) => {
+        switch (type) {
+            case 'order':
+                return { bg: '#e0f2f1', color: '#00897b' };
+            case 'payment':
+                return { bg: '#e8f5e9', color: '#2e7d32' };
+            case 'offer':
+                return { bg: '#fff3e0', color: '#ef6c00' };
+            default:
+                return { bg: '#e3f2fd', color: '#1976d2' };
+        }
+    };
+
+    const handleClearAll = () => {
+        clearNotifications();
+    };
+
+    const handleClose = () => {
+        markNotificationsAsRead();
+        onClose();
     };
 
     return (
         <>
-            <div className="notification-overlay" onClick={onClose} />
+            <div className="notification-overlay" onClick={handleClose} />
             <div className="notification-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="notification-modal-header">
                     <h2>Notifications</h2>
-                    <button className="close-modal-btn" onClick={onClose}>
-                        <X size={20} />
-                    </button>
+                    <div className="notification-header-actions">
+                        {notifications.length > 0 && (
+                            <button className="clear-all-btn" onClick={handleClearAll}>
+                                <Trash2 size={16} />
+                                Clear All
+                            </button>
+                        )}
+                        <button className="close-modal-btn" onClick={handleClose}>
+                            <X size={20} />
+                        </button>
+                    </div>
                 </div>
                 <div className="notification-modal-content">
-                    {notifications.map((notification) => {
-                        const IconComponent = getIcon(notification.icon);
-                        return (
-                            <div key={notification.id} className="notification-item">
+                    {notifications.length === 0 ? (
+                        <div className="notifications-empty">
+                            <Bell size={48} strokeWidth={1} />
+                            <p>No notifications yet</p>
+                        </div>
+                    ) : (
+                        notifications.map((notification) => {
+                            const IconComponent = getIcon(notification.type);
+                            const iconStyle = getIconStyle(notification.type);
+                            return (
                                 <div
-                                    className="notification-item-icon"
-                                    style={{ backgroundColor: notification.iconBg }}
+                                    key={notification.id}
+                                    className={`notification-item ${!notification.read ? 'unread' : ''}`}
                                 >
-                                    <IconComponent size={20} color={notification.iconColor} />
-                                </div>
-                                <div className="notification-item-details">
-                                    <div className="notification-item-header">
-                                        <h3>{notification.title}</h3>
-                                        <span className="notification-item-time">{notification.time}</span>
+                                    <div
+                                        className="notification-item-icon"
+                                        style={{ backgroundColor: iconStyle.bg }}
+                                    >
+                                        <IconComponent size={20} color={iconStyle.color} />
                                     </div>
-                                    <p className="notification-item-message">{notification.message}</p>
+                                    <div className="notification-item-details">
+                                        <div className="notification-item-header">
+                                            <h3>{notification.title}</h3>
+                                            <span className="notification-item-time">{notification.date}</span>
+                                        </div>
+                                        <p className="notification-item-message">{notification.message}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })
+                    )}
                 </div>
             </div>
         </>

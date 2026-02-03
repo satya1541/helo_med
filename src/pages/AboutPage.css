@@ -1,0 +1,250 @@
+.about-page {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Hero Section */
+.about-hero {
+    padding: 4rem 0;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.highlight {
+    color: #00897b;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Partners Section */
+.partners-section {
+    padding: 3rem 0;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+}
+
+.partners-title {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #888;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.partners-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    color: #aaa;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Mission Section */
+.mission-section {
+    padding: 6rem 0;
+    background-color: #f8f9fa;
+}
+
+.split-layout {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #e0f2f1;
+    color: #00897b;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.mission-text {
+    flex: 1;
+}
+
+.mission-text h2 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.mission-text p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.mission-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.value-item {
+    display: flex;
+    gap: 1rem;
+}
+
+.icon-box {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background-color: #00897b;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.value-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+.value-item p {
+    color: #666;
+}
+
+/* Stats Section */
+.stats-section {
+    padding: 4rem 1.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    background: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
+    padding: 3rem;
+    border-radius: 20px;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 3rem;
+    color: #00897b;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    color: #555;
+    font-weight: 600;
+}
+
+/* Testimonials */
+.testimonials-section {
+    padding: 6rem 0;
+    background-color: #ffffff;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: #fdfdfd;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    transition: transform 0.2s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.quote-icon {
+    color: #00897b;
+    opacity: 0.2;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-card p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.rating {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.customer-info h4 {
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .split-layout {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .partners-grid {
+        gap: 2rem;
+    }
+}

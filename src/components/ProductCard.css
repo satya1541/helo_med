@@ -1,121 +1,163 @@
 .product-card {
     background: white;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    padding: 1rem;
-    position: relative;
+    border-radius: var(--radius-lg);
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    transition: box-shadow 0.2s;
+    gap: 16px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    border: 1px solid transparent;
 }
 
 .product-card:hover {
     box-shadow: var(--shadow-md);
+    border-color: var(--border-color);
 }
 
-.product-badge {
-    position: absolute;
-    top: 0;
-    left: 12px;
-    background-color: #2e7d32;
-    /* darker green usually, but image shows blue/teal tag? Image says 16% OFF in blue */
-    background-color: #1976d2;
-    /* Checking image, "Sugar free" has blue tag */
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 6px;
-    text-align: center;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    line-height: 1.1;
-    z-index: 10;
-}
-
-/* Variant for different badges if needed, staying simple for now */
-
-.product-image {
+.card-image-wrapper {
+    position: relative;
     width: 100%;
     aspect-ratio: 1;
-    margin-bottom: 1rem;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-sm);
     overflow: hidden;
-    padding: 1rem;
+    padding: 24px;
 }
 
-.product-img-element {
+.product-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
     mix-blend-mode: multiply;
+    transition: transform 0.6s ease;
 }
 
-.image-placeholder-inner {
-    width: 50%;
-    height: 50%;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
+.product-card:hover .product-image {
+    transform: scale(1.1);
 }
 
-.product-info {
-    flex: 1;
+.discount-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--primary-dark);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    z-index: 2;
+}
+
+.wishlist-trigger {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.product-card:hover .wishlist-trigger {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wishlist-trigger:hover {
+    background: #fff0f0;
+    color: #ff4444;
+}
+
+.wishlist-trigger.active {
+    opacity: 1;
+    transform: translateY(0);
+    color: #ff4444;
+    background: white;
+}
+
+.card-info {
+    padding: 4px 8px 12px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
-.product-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 4px;
+.card-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-color);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--text-primary);
+    line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-.product-weight {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
+.card-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
 }
 
-.product-pricing {
-    margin-top: auto;
-    margin-bottom: 12px;
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.card-pricing {
     display: flex;
     align-items: baseline;
     gap: 8px;
 }
 
-.original-price {
-    font-size: 0.85rem;
-    text-decoration: line-through;
-    color: var(--text-secondary);
-}
-
 .current-price {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
     color: var(--text-primary);
 }
 
-.add-btn {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 600;
-    border-radius: var(--radius-md);
+.old-price {
     font-size: 0.9rem;
-    transition: all 0.2s;
+    text-decoration: line-through;
+    color: var(--text-muted);
 }
 
-.add-btn:hover {
-    background-color: var(--primary-color);
+.add-cart-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.add-cart-circle:hover {
+    background: var(--primary-color);
     color: white;
+    transform: rotate(90deg);
 }

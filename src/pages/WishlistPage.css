@@ -1,0 +1,128 @@
+.wishlist-container {
+    min-height: 100vh;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.wishlist-wrapper {
+    flex: 1;
+    padding-top: 90px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+.wishlist-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 40px;
+}
+
+.wishlist-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.back-btn {
+    background: white;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s;
+    color: var(--text-primary);
+}
+
+.back-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateX(-4px);
+}
+
+.wishlist-content {
+    padding: 0 40px;
+}
+
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.wishlist-empty {
+    text-align: center;
+    padding: 100px 20px;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.empty-icon-box {
+    margin-bottom: 0.5rem;
+}
+
+.wishlist-empty h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.wishlist-empty p {
+    color: var(--text-secondary);
+    max-width: 400px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.start-shopping-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+.start-shopping-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .wishlist-header {
+        padding: 1.5rem 20px;
+    }
+
+    .wishlist-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .wishlist-content {
+        padding: 0 20px;
+    }
+
+    .wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
