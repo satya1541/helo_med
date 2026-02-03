@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -13,6 +14,7 @@ import PrescriptionModal from '../components/PrescriptionModal';
 import './Home.css';
 
 const Home = () => {
+    const navigate = useNavigate();
     const [isPrescModalOpen, setIsPrescModalOpen] = useState(false);
 
     return (
@@ -47,7 +49,7 @@ const Home = () => {
                                 <span className="banner-tag">Skincare</span>
                                 <h2>Treat your skin to <br /> gentle care.</h2>
                                 <p>Discover our dermatologist-tested collection.</p>
-                                <button className="banner-cta">Discover all</button>
+                                <button className="banner-cta" onClick={() => navigate('/medicines')}>Discover all</button>
                             </div>
                         </div>
                     </motion.section>
