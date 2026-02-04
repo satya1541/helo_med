@@ -9,7 +9,7 @@ import './OrdersPage.css';
 
 const OrdersPage = () => {
     const navigate = useNavigate();
-    const { orders } = useCart();
+    const { orders, addresses } = useCart();
     const [activeTab, setActiveTab] = useState('All');
     const [selectedOrder, setSelectedOrder] = useState<typeof orders[0] | null>(null);
 
@@ -208,8 +208,7 @@ const OrdersPage = () => {
                                 <div className="shipping-info">
                                     <p className="section-title">Shipping Address</p>
                                     <p className="address-text">
-                                        123, Green Park, Civil Lines,<br />
-                                        Bangalore, Karnataka - 560001
+                                        {addresses[0]?.text || 'Plot-9429, Cuttack - Puri Bypass Rd, B.B.Nagar, Baragarh, Bhubaneswar, Odisha 751002'}
                                     </p>
                                 </div>
                             </div>

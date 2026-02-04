@@ -109,7 +109,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [addresses, setAddresses] = useState<Address[]>(() => {
         const savedAddresses = localStorage.getItem('helo_med_addresses');
         return savedAddresses ? JSON.parse(savedAddresses) : [
-            { id: '1', type: 'Home', text: '123, Green Park, Civil Lines, Bangalore, Karnataka - 560001' }
+            { id: '1', type: 'Home', text: 'Plot-9429, Cuttack - Puri Bypass Rd, B.B.Nagar, Baragarh, Bhubaneswar, Odisha 751002' }
         ];
     });
 
