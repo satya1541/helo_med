@@ -73,11 +73,11 @@ const CategoriesPage = () => {
                             </div>
                             <div className="products-grid-simple">
                                 {products.map((product) => (
-                                    <div key={product.id} className="simple-product-card">
+                                    <div key={product.id} className="simple-product-card" onClick={() => navigate(`/product/${product.id}`)} style={{ cursor: 'pointer' }}>
                                         <img src={product.image} alt={product.name} />
                                         <p className="product-name-simple">{product.name}</p>
                                         <p className="product-price-simple">₹{product.price}</p>
-                                        <button className="add-btn-simple" onClick={() => handleAdd(product)}>ADD</button>
+                                        <button className="add-btn-simple" onClick={(e) => { e.stopPropagation(); handleAdd(product); }}>ADD</button>
                                     </div>
                                 ))}
                             </div>

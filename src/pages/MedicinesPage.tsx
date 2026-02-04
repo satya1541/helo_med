@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
@@ -20,6 +21,7 @@ const categories = [
 ];
 
 const MedicinesPage = () => {
+    const navigate = useNavigate();
     const { addToCart, updateQuantity, cartItems, toggleWishlist, isInWishlist } = useCart();
     const { showToast } = useToast();
     const [searchQuery, setSearchQuery] = useState('');
@@ -126,6 +128,8 @@ const MedicinesPage = () => {
                                         exit={{ opacity: 0, scale: 0.9 }}
                                         transition={{ delay: index * 0.05 }}
                                         className="med-grid-card"
+                                        onClick={() => navigate(`/product/${med.id}`)}
+                                        style={{ cursor: 'pointer' }}
                                     >
                                         <div className="med-card-visual">
                                             {med.discount && <div className="med-discount">{med.discount}%</div>}

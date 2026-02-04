@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Heart, Plus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -13,9 +14,11 @@ interface ProductCardProps {
     discount?: number;
     image?: string;
     color?: string;
+    category?: string;
 }
 
-const ProductCard = ({ id, name, weight, price, originalPrice, discount, color, image }: ProductCardProps) => {
+const ProductCard = ({ id, name, weight, price, originalPrice, discount, color, image, category }: ProductCardProps) => {
+    const navigate = useNavigate();
     const { addToCart, toggleWishlist, isInWishlist } = useCart();
     const { showToast } = useToast();
 
@@ -44,6 +47,8 @@ const ProductCard = ({ id, name, weight, price, originalPrice, discount, color, 
         <motion.div
             whileHover={{ y: -8 }}
             className="product-card"
+            onClick={() => navigate(`/product/${id}`)}
+            style={{ cursor: 'pointer' }}
         >
             <div className="card-image-wrapper" style={{ backgroundColor: color || 'var(--surface-color)' }}>
                 {discount && (
@@ -65,7 +70,7 @@ const ProductCard = ({ id, name, weight, price, originalPrice, discount, color, 
             </div>
 
             <div className="card-info">
-                <div className="card-category">Wellness Essentials</div>
+                <div className="card-category">{category || 'Wellness Essentials'}</div>
                 <h3 className="card-title">{name}</h3>
                 <p className="card-meta">{weight}</p>
 
