@@ -6,7 +6,10 @@ const Footer = () => {
         <footer className="footer">
             <div className="footer-container">
                 <div className="footer-brand">
-                    <div className="footer-logo">Helo<span className="highlight">Med</span></div>
+                    <div className="footer-logo-wrapper">
+                        <img src="/images/logo.png" alt="HeloMed" className="footer-logo-img" />
+                        <div className="footer-logo">Helo<span className="highlight">Med</span></div>
+                    </div>
                     <p>Redefining pharmaceutical care with premium wellness solutions delivered to your doorstep. Your health, curated for your life.</p>
                 </div>
 
