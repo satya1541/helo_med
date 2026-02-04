@@ -23,6 +23,6 @@ export const ALL_PRODUCTS = [
     { id: 4, name: 'Alprazolam Tablets', price: 350, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80&w=400', weight: '10 Tablets' },
     { id: 5, name: 'Ciprofloxacin - 500', price: 80, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?auto=format&fit=crop&q=80&w=400', weight: '10 Tablets' },
     { id: 6, name: 'Metformin SR - 500', price: 115, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&q=80&w=400', weight: '10 Tablets' },
-    { id: 7, name: 'Digital Thermometer', price: 250, discount: 10, category: 'First Aid', image: 'https://images.unsplash.com/photo-1584622781564-1d9876a13d00?auto=format&fit=crop&q=80&w=400', weight: '1 Unit' },
+    { id: 7, name: 'Digital Thermometer', price: 250, discount: 10, category: 'First Aid', image: '/images/digital-thermometer.png', weight: '1 Unit' },
     { id: 8, name: 'Antiseptic Liquid', price: 160, discount: 15, category: 'First Aid', image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&q=80&w=400', weight: '100ml' },
 ];

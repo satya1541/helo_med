@@ -7,16 +7,9 @@ import { useCart } from '../context/CartContext';
 import { useToast } from '../components/Toast';
 import './MedicinesPage.css';
 
-const medicines = [
-    { id: 1, name: 'Azithromycin - 500', price: 90, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=400' },
-    { id: 2, name: 'Atorvastatin Tablets', price: 289, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&q=80&w=400' },
-    { id: 3, name: 'S-Amlodipine Tablets', price: 450, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&q=80&w=400' },
-    { id: 4, name: 'Alprazolam Tablets', price: 350, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80&w=400' },
-    { id: 5, name: 'Ciprofloxacin - 500', price: 80, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?auto=format&fit=crop&q=80&w=400' },
-    { id: 6, name: 'Metformin SR - 500', price: 115, discount: 30, category: 'Medicine', image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&q=80&w=400' },
-    { id: 7, name: 'Digital Thermometer', price: 250, discount: 10, category: 'First Aid', image: 'https://images.unsplash.com/photo-1584622781564-1d9876a13d00?auto=format&fit=crop&q=80&w=400' },
-    { id: 8, name: 'Antiseptic Liquid', price: 160, discount: 15, category: 'First Aid', image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&q=80&w=400' },
-];
+import { ALL_PRODUCTS } from '../data/products';
+
+const medicines = ALL_PRODUCTS;
 
 const categories = [
     { id: 1, name: 'All', image: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80&w=200' },
@@ -48,8 +41,8 @@ const MedicinesPage = () => {
             id: med.id,
             name: med.name,
             price: med.price,
-            originalPrice: Math.round(med.price * 100 / (100 - med.discount)),
-            discount: med.discount,
+            originalPrice: Math.round(med.price * 100 / (100 - (med.discount || 0))),
+            discount: med.discount || 0,
             image: med.image,
             weight: '10 Tablets'
         });
@@ -135,7 +128,7 @@ const MedicinesPage = () => {
                                         className="med-grid-card"
                                     >
                                         <div className="med-card-visual">
-                                            <div className="med-discount">{med.discount}%</div>
+                                            {med.discount && <div className="med-discount">{med.discount}%</div>}
                                             <button
                                                 className={`med-wishlist-trigger ${isInWishlist(med.id) ? 'active' : ''}`}
                                                 onClick={(e) => handleWishlist(e, med)}
