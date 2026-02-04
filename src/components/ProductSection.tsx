@@ -8,9 +8,10 @@ interface ProductSectionProps {
     subtitle?: React.ReactNode;
     children: React.ReactNode;
     theme?: 'light' | 'mint' | 'soft';
+    onViewAll?: () => void;
 }
 
-const ProductSection = ({ title, subtitle, children, theme = 'light' }: ProductSectionProps) => {
+const ProductSection = ({ title, subtitle, children, theme = 'light', onViewAll }: ProductSectionProps) => {
     return (
         <motion.section
             initial={{ opacity: 0, y: 40 }}
@@ -24,7 +25,7 @@ const ProductSection = ({ title, subtitle, children, theme = 'light' }: ProductS
                     <h2 className="section-title">{title}</h2>
                     {subtitle && <div className="section-subtitle">{subtitle}</div>}
                 </div>
-                <button className="view-all-btn">
+                <button className="view-all-btn" onClick={onViewAll}>
                     <span>View all products</span>
                     <ChevronRight size={18} />
                 </button>

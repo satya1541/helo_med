@@ -30,7 +30,11 @@ const Home = () => {
 
                     <PrescriptionBanner onClick={() => setIsPrescModalOpen(true)} />
 
-                    <ProductSection title="Essential Care" subtitle="Quality essentials for your daily wellness.">
+                    <ProductSection
+                        title="Essential Care"
+                        subtitle="Quality essentials for your daily wellness."
+                        onViewAll={() => navigate('/medicines')}
+                    >
                         {ALL_PRODUCTS.filter(p => [101, 102, 103, 104, 105].includes(p.id)).map(p => (
                             <ProductCard key={p.id} {...p} />
                         ))}
@@ -53,13 +57,23 @@ const Home = () => {
                         </div>
                     </motion.section>
 
-                    <ProductSection title="Nurturing Growth" subtitle="Gentle products for your little ones." theme="soft">
+                    <ProductSection
+                        title="Nurturing Growth"
+                        subtitle="Gentle products for your little ones."
+                        theme="soft"
+                        onViewAll={() => navigate('/medicines')}
+                    >
                         {ALL_PRODUCTS.filter(p => [201, 202, 203, 204, 205].includes(p.id)).map(p => (
                             <ProductCard key={p.id} {...p} />
                         ))}
                     </ProductSection>
 
-                    <ProductSection title="Handpicked Selection" subtitle="Curated for your specific health needs." theme="mint">
+                    <ProductSection
+                        title="Handpicked Selection"
+                        subtitle="Curated for your specific health needs."
+                        theme="mint"
+                        onViewAll={() => navigate('/medicines')}
+                    >
                         {ALL_PRODUCTS.filter(p => [301, 302, 303, 304, 305].includes(p.id)).map(p => (
                             <ProductCard key={p.id} {...p} />
                         ))}
