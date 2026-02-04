@@ -11,6 +11,7 @@ const OrdersPage = () => {
     const navigate = useNavigate();
     const { orders } = useCart();
     const [activeTab, setActiveTab] = useState('All');
+    const [selectedOrder, setSelectedOrder] = useState<typeof orders[0] | null>(null);
 
     const filteredOrders = activeTab === 'All'
         ? orders
@@ -123,7 +124,10 @@ const OrdersPage = () => {
                                                     <span className="total-amount">₹{order.total.toFixed(2)}</span>
                                                 </div>
                                             </div>
-                                            <button className="view-details-btn">
+                                            <button
+                                                className="view-details-btn"
+                                                onClick={() => setSelectedOrder(order)}
+                                            >
                                                 View Details <ChevronRight size={16} />
                                             </button>
                                         </div>
@@ -134,6 +138,90 @@ const OrdersPage = () => {
                     </AnimatePresence>
                 </main>
             </div>
+
+            <AnimatePresence>
+                {selectedOrder && (
+                    <motion.div
+                        className="order-details-modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedOrder(null)}
+                    >
+                        <motion.div
+                            className="order-details-modal"
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="modal-header">
+                                <h3>Order Details</h3>
+                                <button className="close-modal" onClick={() => setSelectedOrder(null)}>×</button>
+                            </div>
+
+                            <div className="modal-body">
+                                <div className="detail-section">
+                                    <p className="detail-label">Order ID</p>
+                                    <p className="detail-value">#{selectedOrder.id}</p>
+                                </div>
+                                <div className="detail-section">
+                                    <p className="detail-label">Order Date</p>
+                                    <p className="detail-value">{selectedOrder.date}</p>
+                                </div>
+                                <div className="detail-section">
+                                    <p className="detail-label">Status</p>
+                                    <p className={`detail-value status-${selectedOrder.status.toLowerCase()}`}>
+                                        {selectedOrder.status}
+                                    </p>
+                                </div>
+
+                                <div className="modal-divider"></div>
+
+                                <div className="items-summary">
+                                    <p className="section-title">Order Items</p>
+                                    {selectedOrder.items.map((item, idx) => (
+                                        <div key={idx} className="modal-item-row">
+                                            <span>{item.name} × {item.quantity}</span>
+                                            <span>₹{(item.price * item.quantity).toFixed(2)}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="modal-divider"></div>
+
+                                <div className="payment-summary">
+                                    <div className="summary-line">
+                                        <span>Subtotal</span>
+                                        <span>₹{selectedOrder.total.toFixed(2)}</span>
+                                    </div>
+                                    <div className="summary-line">
+                                        <span>Delivery</span>
+                                        <span className="free">FREE</span>
+                                    </div>
+                                    <div className="summary-line total">
+                                        <span>Total Amount</span>
+                                        <span>₹{selectedOrder.total.toFixed(2)}</span>
+                                    </div>
+                                </div>
+
+                                <div className="shipping-info">
+                                    <p className="section-title">Shipping Address</p>
+                                    <p className="address-text">
+                                        123, Green Park, Civil Lines,<br />
+                                        Bangalore, Karnataka - 560001
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="modal-footer">
+                                <button className="modal-primary-btn" onClick={() => setSelectedOrder(null)}>Done</button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <Footer />
         </div>
     );
