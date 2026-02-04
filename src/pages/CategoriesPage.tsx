@@ -69,7 +69,7 @@ const CategoriesPage = () => {
                         <section className="explore-section">
                             <div className="section-header">
                                 <h2>Explore our hair care products <span className="highlight-link">Up to 60% off</span></h2>
-                                <a href="#" className="view-all">View all</a>
+                                <button className="view-all-link" onClick={() => navigate('/medicines')}>View all</button>
                             </div>
                             <div className="products-grid-simple">
                                 {products.map((product) => (
@@ -86,15 +86,15 @@ const CategoriesPage = () => {
                         <section className="diabetic-section">
                             <div className="section-header">
                                 <h2>Diabetic essentials</h2>
-                                <a href="#" className="view-all">View all</a>
+                                <button className="view-all-link" onClick={() => navigate('/medicines')}>View all</button>
                             </div>
                             <div className="products-grid-simple">
                                 {products.map((product) => (
-                                    <div key={product.id} className="simple-product-card">
+                                    <div key={product.id} className="simple-product-card" onClick={() => navigate(`/product/${product.id}`)} style={{ cursor: 'pointer' }}>
                                         <img src={product.image} alt={product.name} />
                                         <p className="product-name-simple">{product.name}</p>
                                         <p className="product-price-simple">₹{product.price}</p>
-                                        <button className="add-btn-simple" onClick={() => handleAdd(product)}>ADD</button>
+                                        <button className="add-btn-simple" onClick={(e) => { e.stopPropagation(); handleAdd(product); }}>ADD</button>
                                     </div>
                                 ))}
                             </div>
